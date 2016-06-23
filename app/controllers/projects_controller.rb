@@ -4,7 +4,7 @@ class ProjectsController < ProtectedController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = current_user.projects.all
 
     render json: @projects
   end
@@ -18,7 +18,7 @@ class ProjectsController < ProtectedController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
     if @project.save
       render json: @project, status: :created, location: @project
     else
@@ -49,10 +49,10 @@ class ProjectsController < ProtectedController
   private
 
     def set_project
-      @project = Project.find(params[:id])
+      @project = current_user.projects.find(params[:id])
     end
 
     def project_params
-      params.require(:project, user_id: current_user).permit(:title, :start_date, :end_date, :current_word_count, :total_word_count, :hours_worked)
+      params.require(:projects).permit(:title, :start_date, :end_date, :current_word_count, :total_word_count, :hours_worked)
     end
 end
