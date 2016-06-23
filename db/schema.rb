@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622202835) do
+ActiveRecord::Schema.define(version: 20160623124416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,15 +26,18 @@ ActiveRecord::Schema.define(version: 20160622202835) do
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.integer  "current_word_count"
-    t.integer  "total_word_count"
-    t.integer  "hours_worked"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.string   "title",                          null: false
+    t.date     "start_date",                     null: false
+    t.date     "end_date",                       null: false
+    t.integer  "current_word_count", default: 0
+    t.integer  "total_word_count",               null: false
+    t.integer  "hours_worked",       default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "user_id"
   end
+
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
@@ -48,4 +51,5 @@ ActiveRecord::Schema.define(version: 20160622202835) do
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   add_foreign_key "examples", "users"
+  add_foreign_key "projects", "users"
 end

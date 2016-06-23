@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class ProjectsController < ProtectedController
   before_action :set_project, only: [:show, :update, :destroy]
 
   # GET /projects
@@ -19,7 +19,6 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-
     if @project.save
       render json: @project, status: :created, location: @project
     else
@@ -54,6 +53,6 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-      params.require(:project).permit(:title, :start_date, :end_date, :current_word_count, :total_word_count, :hours_worked)
+      params.require(:project, user_id: current_user).permit(:title, :start_date, :end_date, :current_word_count, :total_word_count, :hours_worked)
     end
 end
