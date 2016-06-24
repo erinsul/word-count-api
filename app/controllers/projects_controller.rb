@@ -12,6 +12,9 @@ class ProjectsController < ProtectedController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project.days_left = (@project.end_date - Date.today).to_i
+    @project.words_remaining = (@project.total_word_count - @project.current_word_count)
+    @project.words_per_day = (@project.words_remaining / @project.days_left)
     render json: @project
   end
 
@@ -53,6 +56,6 @@ class ProjectsController < ProtectedController
     end
 
     def project_params
-      params.require(:projects).permit(:title, :start_date, :end_date, :current_word_count, :total_word_count, :hours_worked)
+      params.require(:projects).permit(:title, :end_date, :current_word_count, :total_word_count)
     end
 end
