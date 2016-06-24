@@ -1,3 +1,4 @@
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :title, :start_date, :end_date, :current_word_count, :total_word_count, :hours_worked
+  attributes :id, :title, :end_date, :days_left, :current_word_count, :total_word_count,
+   :words_remaining, :words_per_day
 end
