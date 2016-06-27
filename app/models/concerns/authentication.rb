@@ -1,4 +1,13 @@
 #
+
+class EmailValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors[attribute] << (options[:message] || "is not an email")
+    end
+  end
+end
+
 module Authentication
   extend ActiveSupport::Concern
 
@@ -16,7 +25,9 @@ module Authentication
     has_secure_password
     before_create :set_token
     after_find :fix_up_token
-    validates :email, uniqueness: true
+    validates :email, uniqueness: true, email: true
+    validates :password, length: { minimum: 5,
+    message: "Your password must be at least %{count} characters long" }
   end
 
   def logout
