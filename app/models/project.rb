@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   end
 
   belongs_to :user, inverse_of: :projects
-  validates :title, :end_date, :total_word_count, :user_id, presence: true
+  validates :title, :end_date, :total_count, :user_id, presence: true
   validate :end_date_cannot_be_in_the_past
 
 

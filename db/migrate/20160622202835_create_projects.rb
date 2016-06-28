@@ -4,10 +4,11 @@ class CreateProjects < ActiveRecord::Migration
       t.string :title, null: false
       t.date :end_date, null: false
       t.integer :days_left, default: 0
-      t.integer :current_word_count, default: 0
-      t.integer :total_word_count, null: false
-      t.integer :words_remaining
-      t.integer :words_per_day
+      t.integer :current_count, default: 0
+      t.integer :total_count, null: false
+      t.integer :amount_remaining
+      t.integer :amount_per_day
+      t.string :counter
 
       t.timestamps null: false
     end
