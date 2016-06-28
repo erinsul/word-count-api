@@ -17,16 +17,14 @@ ActiveRecord::Schema.define(version: 20160623124416) do
   enable_extension "plpgsql"
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title",                        null: false
-    t.date     "end_date",                     null: false
-    t.integer  "days_left",        default: 0
-    t.integer  "current_count",    default: 0
-    t.integer  "total_count",                  null: false
-    t.integer  "amount_remaining"
-    t.integer  "amount_per_day"
+    t.string   "title",                     null: false
+    t.date     "end_date",                  null: false
+    t.integer  "days_left",     default: 0
+    t.integer  "current_count", default: 0
+    t.integer  "total_count",               null: false
     t.string   "counter"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "user_id"
   end
 

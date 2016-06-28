@@ -13,8 +13,6 @@ class ProjectsController < ProtectedController
   # GET /projects/1.json
   def show
     @project.days_left = (@project.end_date - Date.today).to_i
-    @project.amount_remaining = (@project.total_count - @project.current_count)
-    @project.amount_per_day = (@project.amount_remaining / @project.days_left)
     render json: @project
   end
 

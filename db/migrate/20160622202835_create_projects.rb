@@ -6,8 +6,6 @@ class CreateProjects < ActiveRecord::Migration
       t.integer :days_left, default: 0
       t.integer :current_count, default: 0
       t.integer :total_count, null: false
-      t.integer :amount_remaining
-      t.integer :amount_per_day
       t.string :counter
 
       t.timestamps null: false
